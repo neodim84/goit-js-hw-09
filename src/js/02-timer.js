@@ -59,9 +59,6 @@ const timer = {
     seconds: document.querySelector('[data-seconds]'),
   },
   start() {
-    if (timerDeadline < 100) {
-      clearInterval(this.intervalId);
-    }
     this.intervalId = setInterval(() => {
       const deltaTime = timerDeadline - Date.now();
       const timeMs = convertMs(deltaTime);
@@ -70,6 +67,9 @@ const timer = {
       hours.textContent = pad(timeMs.hours);
       minutes.textContent = pad(timeMs.minutes);
       seconds.textContent = pad(timeMs.seconds);
+      if (deltaTime < 1000) {
+        clearInterval(this.intervalId);
+      }
     }, 1000);
   },
 };
