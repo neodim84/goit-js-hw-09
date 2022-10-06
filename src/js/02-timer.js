@@ -53,23 +53,23 @@ function pad(value) {
 const timer = {
   intervalId: null,
   refs: {
-    daysRef: document.querySelector('[data-days]'),
-    hoursRef: document.querySelector('[data-hours]'),
-    minutesRef: document.querySelector('[data-minutes]'),
-    secondsRef: document.querySelector('[data-seconds]'),
+    days: document.querySelector('[data-days]'),
+    hours: document.querySelector('[data-hours]'),
+    minutes: document.querySelector('[data-minutes]'),
+    seconds: document.querySelector('[data-seconds]'),
   },
   start() {
-    if (timerDeadline < 1000) {
+    if (timerDeadline < 100) {
       clearInterval(this.intervalId);
     }
     this.intervalId = setInterval(() => {
       const deltaTime = timerDeadline - Date.now();
       const timeMs = convertMs(deltaTime);
-      //   const { daysRef, hoursRef, minutesRef, secondsRef } = this.refs;
-      this.refs.daysRef.textContent = pad(timeMs.days);
-      this.refs.hoursRef.textContent = pad(timeMs.hours);
-      this.refs.minutesRef.textContent = pad(timeMs.minutes);
-      this.refs.secondsRef.textContent = pad(timeMs.seconds);
+      const { days, hours, minutes, seconds } = this.refs;
+      days.textContent = pad(timeMs.days);
+      hours.textContent = pad(timeMs.hours);
+      minutes.textContent = pad(timeMs.minutes);
+      seconds.textContent = pad(timeMs.seconds);
     }, 1000);
   },
 };
